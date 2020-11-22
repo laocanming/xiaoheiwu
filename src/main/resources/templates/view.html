@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8"> <style>
+    a:link{text-decoration: none}
+</style>
+    <title th:text="${userModel.user2.tags}"></title>
+</head>
+<body>
+<a th:href="@{/}">返回</a>
+<h2 th:text="${userModel.title}"></h2>
+<h3 th:text="${userModel.user2.title}"></h3>
+<p ></p>
+<p><strong>发布于</strong><span th:text="${userModel.user2.created}"></span></p>
+<div>
+    <p><span th:text="${userModel.user2.content}"></span></p>
+</div>
+<p>用户评论</p>
+<tbody>
+<tr th:if="${userModel.user.size()} eq 0">
+    <td colspan="3">没有用户评论！</td>
+</tr>
+<tr th:each="user:${userModel.user}">
+    <td th:text="${user.author}"></td></br>
+    <td th:text="${user.c_content}"></td></br>
+    <td th:text="${user.c_created}"></td></br>
+</tr>
+</tbody>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+
+    <div th:replace="index::topbar"></div>
+
+    <style>
+
+        .ye {
+
+            /*margin: 0 auto;*/
+            text-align: center;
+            /*position: absolute;*/
+            height: 20px;
+            /*width: 100%;*/
+            /*left: 46%;*/
+            margin-top: 400px;
+            display: inline-block;
+
+
+        }
+
+        a:link {
+            text-decoration: none
+        }
+
+        .table {
+            float: left;
+            margin-left:50px;
+            text-align: center;
+        }
+
+        .table1 {
+            text-align: center;
+            height: 70%;
+            width: 100%;
+            left:-50px ;
+            position: absolute;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="table1">
+
+        <table border="1" th:align="center">
+            <div class="table" style="margin-left: 80px">
+                <p><a th:href="@{/admin/form}">发文章</a></p>
+                <p><a th:text="${userModel.title}" th:href="@{/admin/}"/></p>
+<!--                <a href="/">首页</a>-->
+            </div>
+
+            <tr>
+                <td>文章标题</td>
+                <td>发布时间</td>
+                <td>所属分类</td>
+                <td>操作</td>
+            </tr>
+
+            <tr th:if="${userModel.page.list.size()} eq 0">
+                <td colspan="3">没有文章信息！</td>
+            </tr>
+
+            <tr th:each="user:${userModel.page.list}">
+                <td th:text="${user.title}"></td>
+                <td th:text="${user.created}"></td>
+
+                <td th:text="${user.categories}"></td>
+                <td>
+                    <a th:href="@{'/admin/modify/'+${user.id}}">编辑</a>
+                    <a th:href="@{'/admin/delete/'+${user.id}}">删除</a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+<div class="ye" th:align="center">
+    <a class="shouye" th:href="@{/admin/(current=1)}">第一页 </a>
+    <th:block th:if="${userModel.page.hasPreviousPage}">
+        <a class="shouye" th:href="@{/admin/(current=${page.prePage})}">上一页</a>
+    </th:block>
+    <th:block th:if="${userModel.page.hasNextPage}">
+        <a class="shouye" th:href="@{/admin/(current=${page.nextPage})}">下一页</a>
+    </th:block>
+</div>
+
+</body>
+</html>

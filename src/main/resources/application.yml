@@ -1,0 +1,6 @@
+
+
+#浏览器cookie相关设置
+COOKIE:
+  # 设置cookie默认时长为30分钟
+  VALIDITY: 900

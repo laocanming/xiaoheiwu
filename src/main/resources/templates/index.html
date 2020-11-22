@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+<head>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" th:fragment="topbar">
+    <meta charset="UTF-8">
+    <link th:href="@{/asserts/css/index.css}" rel="stylesheet"/>
+    <link th:href="@{/asserts/css/indexbody.css}" rel="stylesheet"/>
+    <div class="header">
+        <h2 class="h2" th:text="*{username}">游客登录</h2>
+        <a th:href="@{/}" class="header-logo">1838060323个人博客小站</a>
+        <form name="logoutform" th:action="@{/logout}" method="post"></form>
+        <a class="header-info" sec:authorize="!isAuthenticated()" th:href="@{/login}">登录</a>
+        <a class="header-info" sec:authorize="isAuthenticated()"
+           href="javascript:document.logoutform.submit();">退出</a>
+
+        <a class="header-info1" th:href="@{/admin/}">后台管理</a>
+        <!--           <div class="header-search" onclick="">-->
+        <!--            <span class="icon-search"></span>-->
+        <!--            <form role="search" onsubmit="return false;">-->
+        <!--                <span class="search-box">-->
+        <!--                    <input type="text" id="search-inp" class="input" placeholder="搜索..." maxlength="40"-->
+        <!--                           autocomplete="off"/>-->
+        <!--                </span>-->
+        <!--            </form>-->
+        <!--        </div>-->
+    </div>
+    </nav>
+</head>
+<body>
+<!--<div class="yeye">-->
+<!--<table th:align="center">-->
+<!--    <tbody>-->
+<!--    <tr th:if="${userModel.page.list.size()} eq 0">-->
+<!--        <td colspan="3">没有文章信息！</td>-->
+<!--    </tr>-->
+<!--    <tr th:each="user:${userModel.page.list}">-->
+<!--        &lt;!&ndash;        <td>所属分类</td>&ndash;&gt;-->
+<!--        <div class="a">-->
+<!--            <td class="mo" th:text="${user.categories}"></td>-->
+<!--            <td class="fa">发布时间</td>-->
+<!--            <td class="fa1" th:text="${user.created}"></td>-->
+<!--        </div>-->
+<!--        <div class="b">-->
+<!--        <td><a class="biao" th:text="${user.title}" th:href="@{'/'+${user.id}}"></a></td>-->
+<!--        </div>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--</div>-->
+<div class="tab">
+
+    <div class="abc">
+
+        <div class="yeye" th:each="user:${userModel.page.list}">
+
+            <div class="yeee"></div>
+
+            <div class="yeyw">
+                <p class="mo" th:text="${user.categories}"></p>
+
+                <p class="fa">发布时间</p>
+                <p class="fa1" th:text="${user.created}"></p>
+                <p><a class="biao" th:text="${user.title}" th:href="@{'/'+${user.id}}"></a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cba">
+        <div class="ppp">
+
+
+        <p class="pp"> 联系电话13878429417</p>
+        <a class="lainjia" href="https://www.bilibili.com/video/BV1Et411Y7tQ?p=4"> 490110877</a>
+         </div>
+    </div>
+
+</div>
+
+
+
+
+
+<div class="ye" th:align="center">
+    <a class="biao" th:href="@{/(current=1)}">第一页</a>
+    <th:block th:if="${userModel.page.hasPreviousPage}">
+        <a class="biao" th:href="@{/(current=${page.prePage})}">上一页</a>
+    </th:block>
+    <th:block th:if="${userModel.page.hasNextPage}">
+        <a class="biao" th:href="@{/(current=${page.nextPage})}">下一页</a>
+    </th:block>
+</div>
+
+</body>
+</html>

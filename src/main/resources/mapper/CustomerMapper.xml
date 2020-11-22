@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.CustomerMapper">
+
+    <select id="findCustomerById" parameterType="Integer" resultType="User">
+        select * from users where id=#{id}
+    </select>
+
+    <select id="findById" parameterType="Integer" resultType="Administration">
+        select * from t_article where id=#{id}
+    </select>
+
+    <select id="findAdministration"  resultType="Administration">
+        select * from t_article
+    </select>
+
+    <select id="findCustomerByName" parameterType="String" resultType="Customer">
+        select * from users where name like "%${name}%"
+    </select>
+
+    <select id="findComment" parameterType="Integer" resultType="Comment">
+        select * from t_comment where article_id=#{id}
+    </select>
+
+
+    <select id="findByid" parameterType="Integer" resultType="Administration">
+       SELECT a.*,c.created c_created,c.content c_content,c.author
+        FROM t_article a,t_comment c
+        WHERE a.id=c.article_id AND a.id =#{id}
+    </select>
+
+    <select id="findStatistic"  resultType="Statistic">
+        SELECT a.id id,a.title title,created,c.hits hits,categories
+        FROM t_article a,t_statistic c
+        WHERE a.id=c.article_id
+    </select>
+
+
+    <delete id="DeleteAdministrationById" parameterType="Integer" >
+        delete from t_article where id=#{id}
+    </delete>
+
+
+    <update id="updateAdministration" parameterType="Administration">
+        update t_article set title=#{title},content=#{content},tags=#{tags} where id=#{id}
+    </update>
+
+
+    <insert id="InsertAdministrationData" parameterType="Administration">
+        insert into t_article(title,content,tags,created) value (#{title},#{content},#{tags},#{created})
+    </insert>
+
+    <insert id="Insertt_statisticData" parameterType="Long">
+        insert into t_statistic(article_id) value (#{article_id})
+    </insert>
+
+    <select id="MaxId" resultType="Long">
+        select id from  t_article order by id desc limit 1;
+    </select>
+
+    <delete id="Deletet_statisticById" parameterType="Integer" >
+        delete from t_statistic where article_id=#{id}
+    </delete>
+
+    <delete id="DeleteById" parameterType="Integer" >
+        delete from users where id=#{id}
+    </delete>
+
+    <insert id="InsertData" parameterType="User">
+        insert into users(username,password,name) value (#{username},#{password},#{name})
+    </insert>
+
+    <update id="updateUser" parameterType="User">
+        update users set username=#{username},password=#{password},name=#{name} where id=#{id}
+    </update>
+
+    <select id="findUser"  resultType="User">
+        select * from users
+    </select>
+
+</mapper>
